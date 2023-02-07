@@ -1,102 +1,15 @@
 import { makeAutoObservable } from "mobx";
-import device from "../assets/device.png"; // ! Delete
 
 export default class DeviceStore {
   constructor() {
-    this._types = [
-      {
-        id: 1,
-        name: "Smartphones",
-      },
-      {
-        id: 2,
-        name: "Tvs",
-      },
-      {
-        id: 3,
-        name: "Laptops",
-      },
-      {
-        id: 4,
-        name: "Fridges",
-      },
-    ];
-    this._brands = [
-      {
-        id: 1,
-        name: "Apple",
-      },
-      {
-        id: 2,
-        name: "Samsung",
-      },
-      {
-        id: 3,
-        name: "Xiaomi",
-      },
-      {
-        id: 4,
-        name: "Lenovo",
-      },
-      {
-        id: 5,
-        name: "Nokia",
-      },
-    ];
-    this._devices = [
-      {
-        id: 1,
-        name: "iPhone 14",
-        price: 30000,
-        rating: 5,
-        img: device,
-      },
-      {
-        id: 2,
-        name: "iPhone 14 Plus",
-        price: 35000,
-        rating: 4,
-        img: device,
-      },
-      {
-        id: 3,
-        name: "iPhone 14 Pro",
-        price: 40000,
-        rating: 2,
-        img: device,
-      },
-      {
-        id: 4,
-        name: "iPhone 14 Pro Max",
-        price: 50000,
-        rating: 5,
-        img: device,
-      },
-      {
-        id: 5,
-        name: "iPhone 14 Pro Max",
-        price: 50000,
-        rating: 5,
-        img: device,
-      },
-      {
-        id: 7,
-        name: "iPhone 14 Pro Max",
-        price: 50000,
-        rating: 5,
-        img: device,
-      },
-      {
-        id: 8,
-        name: "iPhone 14 Pro Max",
-        price: 50000,
-        rating: 5,
-        img: device,
-      },
-    ];
-
+    this._types = [];
+    this._brands = [];
+    this._devices = [];
     this._selectedType = {};
     this._selectedBrand = {};
+    this._page = 1;
+    this._totalCount = 0;
+    this._limit = 3;
 
     makeAutoObservable(this);
   }
@@ -114,11 +27,21 @@ export default class DeviceStore {
   }
 
   setSelectedType(type) {
+    this.setPage(1);
     this._selectedType = type;
   }
 
   setSelectedBrand(brand) {
+    this.setPage(1);
     this._selectedBrand = brand;
+  }
+
+  setPage(page) {
+    this._page = page;
+  }
+
+  setTotalCount(count) {
+    this._totalCount = count;
   }
 
   get types() {
@@ -139,5 +62,17 @@ export default class DeviceStore {
 
   get selectedBrand() {
     return this._selectedBrand;
+  }
+
+  get page() {
+    return this._page;
+  }
+
+  get totalCount() {
+    return this._totalCount;
+  }
+
+  get limit() {
+    return this._limit;
   }
 }
